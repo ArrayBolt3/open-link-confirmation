@@ -83,7 +83,13 @@ exit_code: <code>${exit_code}</code>"
    error_question=""
    error_button="ok"
    error_body="<p>${error_message}</p>"
-   /usr/libexec/msgcollector/generic_gui_message.py "error" "${error_title}" "${error_body}" "${error_question}" "${error_button}"
+   ## Tolerate the dialog failing (same as sanitize-string above): the very
+   ## conditions that reach this handler -- a headless or display-unreachable
+   ## caller, a transiently crashing GUI tool -- are the ones that also break
+   ## this recovery dialog. Without '|| true' its failure re-enters the ERR
+   ## trap and aborts the handler mid-way (a raw SIGABRT exit plus core dumps)
+   ## instead of the defined 'exit 1' below.
+   /usr/libexec/msgcollector/generic_gui_message.py "error" "${error_title}" "${error_body}" "${error_question}" "${error_button}" || true
 
    exit 1
 }
