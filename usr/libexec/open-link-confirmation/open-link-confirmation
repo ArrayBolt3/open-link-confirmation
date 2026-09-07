@@ -98,8 +98,8 @@ exit_code: <code>${exit_code}</code>"
 ## used; nothing runs in between, so the coverage is unchanged.
 trap error_handler ERR
 
-# shellcheck source=../../../../helper-scripts/usr/libexec/helper-scripts/has.sh
-source "${HELPER_SCRIPTS_PATH:-}"/usr/libexec/helper-scripts/has.sh
+# shellcheck source=../../../../helper-scripts/usr/libexec/helper-scripts/has.bsh
+source "${HELPER_SCRIPTS_PATH:-}"/usr/libexec/helper-scripts/has.bsh
 
 source_config() {
    ## Environment variables take precedence over the configuration files.
